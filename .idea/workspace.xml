@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee029c65-e3fb-43e4-a9a6-fa258e4d5313" name="Default Changelist" comment="" />
+    <list default="true" id="ee029c65-e3fb-43e4-a9a6-fa258e4d5313" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composite/CompositeView.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composite/ContainerInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composite/TemplateInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composite/View.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composite/ViewInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composite/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composite/view/body.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composite/view/footer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composite/view/header.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvc/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvc/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvc/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvc/ti/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvc/tni/ex1.php" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,6 +26,9 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1lbK77RPWRGKMFEe2Eb3BryCwtZ" />
   <component name="ProjectViewState">
@@ -19,8 +39,30 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/xxxxx" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/xxxxx" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/mvc" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/app/controllers" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/mvc/index.php">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHP Script.index.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -33,6 +75,12 @@
       <workItem from="1607860182158" duration="606000" />
       <workItem from="1607871118143" duration="2487000" />
       <workItem from="1607876129891" duration="1328000" />
+      <workItem from="1607912631162" duration="111000" />
+      <workItem from="1607912939095" duration="1895000" />
+      <workItem from="1607929542715" duration="8000" />
+      <workItem from="1607929703558" duration="8000" />
+      <workItem from="1607930981318" duration="4453000" />
+      <workItem from="1607936674706" duration="4660000" />
     </task>
     <servers />
   </component>
