@@ -1,0 +1,9 @@
+# Cần bật RewriteEngine để sử dụng RewriteRule
+RewriteEngine On
+
+# Chỉ RewriteRule nếu REQUEST_FILENAME không phải là thư mục, file tồn tại
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Chuyển hướng các REQUEST_FILENAME không tồn tại đến index.php
+RewriteRule ^ index.php
