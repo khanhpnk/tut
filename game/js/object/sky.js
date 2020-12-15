@@ -10,7 +10,7 @@ function createSky(){
  */
 Sky = function(){
     this.mesh = new THREE.Object3D();
-    this.nClouds = 20; // Định nghĩa tổng cộng 20 chùm mây
+    this.nClouds = 10; // Định nghĩa tổng cộng 10 chùm mây
     this.clouds = [];
     var stepAngle = Math.PI*2 / this.nClouds;
     for(var i=0; i<this.nClouds; i++){

@@ -1,3 +1,13 @@
+var Colors = {
+    red:0xf25346,
+    white:0xd8d0d1,
+    brown:0x59332e,
+    pink:0xF5986E,
+    brownDark:0x23190f,
+    blue:0x68c3c0,
+    yellow:0xf4ce93,
+};
+
 function handleWindowResize() {
     HEIGHT = window.innerHeight;
     WIDTH = window.innerWidth;
@@ -27,7 +37,7 @@ function createScene() {
 
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT, 1, 10000);
-    scene.fog = new THREE.Fog(0xf7d9aa, 100,950);
+    scene.fog = new THREE.Fog(0xf7d9aa, 100,950); // sương mù
     camera.position.x = 0;
     camera.position.z = 200;
     camera.position.y = game.planeDefaultHeight;
@@ -36,7 +46,6 @@ function createScene() {
     renderer.setSize(WIDTH, HEIGHT);
     renderer.shadowMap.enabled = true;
     document.getElementById('world').appendChild(renderer.domElement);
-
     window.addEventListener('resize', handleWindowResize, false);
 }
 
