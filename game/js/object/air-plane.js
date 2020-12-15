@@ -1,7 +1,7 @@
 function createPlane(){
     airplane = new AirPlane();
     airplane.mesh.scale.set(.25,.25,.25);
-    airplane.mesh.position.y = 100; // TODO: airplane.mesh.position.y = game.planeDefaultHeight;
+    airplane.mesh.position.y = game.planeDefaultHeight;
     scene.add(airplane.mesh);
 }
 

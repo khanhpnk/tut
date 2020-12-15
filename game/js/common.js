@@ -26,11 +26,11 @@ function createScene() {
     WIDTH = window.innerWidth;
 
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(60, WIDTH / HEIGHT, 1, 10000);
+    camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT, 1, 10000);
     scene.fog = new THREE.Fog(0xf7d9aa, 100,950);
     camera.position.x = 0;
     camera.position.z = 200;
-    camera.position.y = 100;
+    camera.position.y = game.planeDefaultHeight;
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(WIDTH, HEIGHT);
@@ -52,8 +52,8 @@ function createLights() {
     shadowLight.shadow.camera.bottom = -400;
     shadowLight.shadow.camera.near = 1;
     shadowLight.shadow.camera.far = 1000;
-    shadowLight.shadow.mapSize.width = 2048;
-    shadowLight.shadow.mapSize.height = 2048;
+    shadowLight.shadow.mapSize.width = 4096;
+    shadowLight.shadow.mapSize.height = 4096;
 
     scene.add(hemisphereLight);
     scene.add(shadowLight);

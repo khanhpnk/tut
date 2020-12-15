@@ -1,22 +1,3 @@
-//COLORS
-var Colors = {
-    red:0xf25346,
-    white:0xd8d0d1,
-    brown:0x59332e,
-    brownDark:0x23190f,
-    pink:0xF5986E,
-    yellow:0xf4ce93,
-    blue:0x68c3c0,
-
-};
-
-///////////////
-
-// GAME VARIABLES
-var game;
-var deltaTime = 0;
-var newTime = new Date().getTime();
-var oldTime = new Date().getTime();
 var ennemiesPool = [];
 var particlesPool = [];
 var particlesInUse = [];
@@ -47,8 +28,6 @@ function resetGame(){
           planeRotXSensivity:0.0008,
           planeRotZSensivity:0.0004,
           planeFallSpeed:.001,
-          planeMinSpeed:1.2,
-          planeMaxSpeed:1.6,
           planeSpeed:0,
           planeCollisionDisplacementX:0,
           planeCollisionSpeedX:0,
@@ -79,132 +58,6 @@ function resetGame(){
   fieldLevel.innerHTML = Math.floor(game.level);
 }
 
-//THREEJS RELATED VARIABLES
-
-var scene,
-    camera, fieldOfView, aspectRatio, nearPlane, farPlane,
-    renderer,
-    container,
-    controls;
-
-//SCREEN & MOUSE VARIABLES
-
-var HEIGHT, WIDTH,
-    mousePos = { x: 0, y: 0 };
-
-//INIT THREE JS, SCREEN AND MOUSE EVENTS
-
-function createScene() {
-
-  HEIGHT = window.innerHeight;
-  WIDTH = window.innerWidth;
-
-  scene = new THREE.Scene();
-  aspectRatio = WIDTH / HEIGHT;
-  fieldOfView = 50;
-  nearPlane = .1;
-  farPlane = 10000;
-  camera = new THREE.PerspectiveCamera(
-    fieldOfView,
-    aspectRatio,
-    nearPlane,
-    farPlane
-    );
-  scene.fog = new THREE.Fog(0xf7d9aa, 100,950);
-  camera.position.x = 0;
-  camera.position.z = 200;
-  camera.position.y = game.planeDefaultHeight;
-  //camera.lookAt(new THREE.Vector3(0, 400, 0));
-
-  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setSize(WIDTH, HEIGHT);
-
-  renderer.shadowMap.enabled = true;
-
-  container = document.getElementById('world');
-  container.appendChild(renderer.domElement);
-
-  window.addEventListener('resize', handleWindowResize, false);
-
-  /*
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.minPolarAngle = -Math.PI / 2;
-  controls.maxPolarAngle = Math.PI ;
-
-  //controls.noZoom = true;
-  //controls.noPan = true;
-  //*/
-}
-
-// MOUSE AND SCREEN EVENTS
-
-function handleWindowResize() {
-  HEIGHT = window.innerHeight;
-  WIDTH = window.innerWidth;
-  renderer.setSize(WIDTH, HEIGHT);
-  camera.aspect = WIDTH / HEIGHT;
-  camera.updateProjectionMatrix();
-}
-
-function handleMouseMove(event) {
-  var tx = -1 + (event.clientX / WIDTH)*2;
-  var ty = 1 - (event.clientY / HEIGHT)*2;
-  mousePos = {x:tx, y:ty};
-}
-
-function handleTouchMove(event) {
-    event.preventDefault();
-    var tx = -1 + (event.touches[0].pageX / WIDTH)*2;
-    var ty = 1 - (event.touches[0].pageY / HEIGHT)*2;
-    mousePos = {x:tx, y:ty};
-}
-
-function handleMouseUp(event){
-  if (game.status == "waitingReplay"){
-    resetGame();
-    hideReplay();
-  }
-}
-
-
-function handleTouchEnd(event){
-  if (game.status == "waitingReplay"){
-    resetGame();
-    hideReplay();
-  }
-}
-
-// LIGHTS
-
-var ambientLight, hemisphereLight, shadowLight;
-
-function createLights() {
-
-  hemisphereLight = new THREE.HemisphereLight(0xaaaaaa,0x000000, .9)
-
-  ambientLight = new THREE.AmbientLight(0xdc8874, .5);
-
-  shadowLight = new THREE.DirectionalLight(0xffffff, .9);
-  shadowLight.position.set(150, 350, 350);
-  shadowLight.castShadow = true;
-  shadowLight.shadow.camera.left = -400;
-  shadowLight.shadow.camera.right = 400;
-  shadowLight.shadow.camera.top = 400;
-  shadowLight.shadow.camera.bottom = -400;
-  shadowLight.shadow.camera.near = 1;
-  shadowLight.shadow.camera.far = 1000;
-  shadowLight.shadow.mapSize.width = 4096;
-  shadowLight.shadow.mapSize.height = 4096;
-
-  var ch = new THREE.CameraHelper(shadowLight.shadow.camera);
-
-  //scene.add(ch);
-  scene.add(hemisphereLight);
-  scene.add(shadowLight);
-  scene.add(ambientLight);
-
-}
-
 Ennemy = function(){
   var geom = new THREE.TetrahedronGeometry(8,2);
   var mat = new THREE.MeshPhongMaterial({
@@ -216,7 +69,6 @@ Ennemy = function(){
   this.mesh = new THREE.Mesh(geom,mat);
   this.mesh.castShadow = true;
   this.angle = 0;
-  this.dist = 0;
 }
 
 EnnemiesHolder = function (){
@@ -332,85 +184,6 @@ ParticlesHolder.prototype.spawnParticles = function(pos, density, color, scale){
   }
 }
 
-Coin = function(){
-  var geom = new THREE.TetrahedronGeometry(5,0);
-  var mat = new THREE.MeshPhongMaterial({
-    color:0x009999,
-    shininess:0,
-    specular:0xffffff,
-
-    shading:THREE.FlatShading
-  });
-  this.mesh = new THREE.Mesh(geom,mat);
-  this.mesh.castShadow = true;
-  this.angle = 0;
-  this.dist = 0;
-}
-
-CoinsHolder = function (nCoins){
-  this.mesh = new THREE.Object3D();
-  this.coinsInUse = [];
-  this.coinsPool = [];
-  for (var i=0; i<nCoins; i++){
-    var coin = new Coin();
-    this.coinsPool.push(coin);
-  }
-}
-
-CoinsHolder.prototype.spawnCoins = function(){
-
-  var nCoins = 1 + Math.floor(Math.random()*10);
-  var d = game.seaRadius + game.planeDefaultHeight + (-1 + Math.random() * 2) * (game.planeAmpHeight-20);
-  var amplitude = 10 + Math.round(Math.random()*10);
-  for (var i=0; i<nCoins; i++){
-    var coin;
-    if (this.coinsPool.length) {
-      coin = this.coinsPool.pop();
-    }else{
-      coin = new Coin();
-    }
-    this.mesh.add(coin.mesh);
-    this.coinsInUse.push(coin);
-    coin.angle = - (i*0.02);
-    coin.distance = d + Math.cos(i*.5)*amplitude;
-    coin.mesh.position.y = -game.seaRadius + Math.sin(coin.angle)*coin.distance;
-    coin.mesh.position.x = Math.cos(coin.angle)*coin.distance;
-  }
-}
-
-CoinsHolder.prototype.rotateCoins = function(){
-  for (var i=0; i<this.coinsInUse.length; i++){
-    var coin = this.coinsInUse[i];
-    if (coin.exploding) continue;
-    coin.angle += game.speed*deltaTime*game.coinsSpeed;
-    if (coin.angle>Math.PI*2) coin.angle -= Math.PI*2;
-    coin.mesh.position.y = -game.seaRadius + Math.sin(coin.angle)*coin.distance;
-    coin.mesh.position.x = Math.cos(coin.angle)*coin.distance;
-    coin.mesh.rotation.z += Math.random()*.1;
-    coin.mesh.rotation.y += Math.random()*.1;
-
-    //var globalCoinPosition =  coin.mesh.localToWorld(new THREE.Vector3());
-    var diffPos = airplane.mesh.position.clone().sub(coin.mesh.position.clone());
-    var d = diffPos.length();
-    if (d<game.coinDistanceTolerance){
-      this.coinsPool.unshift(this.coinsInUse.splice(i,1)[0]);
-      this.mesh.remove(coin.mesh);
-      particlesHolder.spawnParticles(coin.mesh.position.clone(), 5, 0x009999, .8);
-      addEnergy();
-      i--;
-    }else if (coin.angle > Math.PI){
-      this.coinsPool.unshift(this.coinsInUse.splice(i,1)[0]);
-      this.mesh.remove(coin.mesh);
-      i--;
-    }
-  }
-}
-
-function createCoins(){
-  coinsHolder = new CoinsHolder(20);
-  scene.add(coinsHolder.mesh)
-}
-
 function createEnnemies(){
   for (var i=0; i<10; i++){
     var ennemy = new Ennemy();
@@ -430,13 +203,7 @@ function createParticles(){
 }
 
 function loop(){
-
-  newTime = new Date().getTime();
-  deltaTime = newTime-oldTime;
-  oldTime = newTime;
-
   if (game.status=="playing"){
-
     // Add energy coins every 100m;
     if (Math.floor(game.distance)%game.distanceForCoinsSpawn == 0 && Math.floor(game.distance) > game.coinLastSpawn){
       game.coinLastSpawn = Math.floor(game.distance);
@@ -485,7 +252,6 @@ function loop(){
 
   }
 
-
   airplane.propeller.rotation.x +=.2 + game.planeSpeed * deltaTime*.005;
   sea.mesh.rotation.z += game.speed*deltaTime;//*game.seaRotationSpeed;
 
@@ -495,12 +261,6 @@ function loop(){
 
   coinsHolder.rotateCoins();
   ennemiesHolder.rotateEnnemies();
-
-  sky.moveClouds();
-  sea.moveWaves();
-
-  renderer.render(scene, camera);
-  requestAnimationFrame(loop);
 }
 
 function updateDistance(){
@@ -508,10 +268,7 @@ function updateDistance(){
   fieldDistance.innerHTML = Math.floor(game.distance);
   var d = 502*(1-(game.distance%game.distanceForLevelUpdate)/game.distanceForLevelUpdate);
   levelCircle.setAttribute("stroke-dashoffset", d);
-
 }
-
-var blinkEnergy=false;
 
 function updateEnergy(){
   game.energy -= game.speed*deltaTime*game.ratioSpeedEnergy;
@@ -540,17 +297,15 @@ function removeEnergy(){
   game.energy = Math.max(0, game.energy);
 }
 
-
-
 function updatePlane(){
-
-  game.planeSpeed = normalize(mousePos.x,-.5,.5,game.planeMinSpeed, game.planeMaxSpeed);
+  var planeMinSpeed = 1.2;
+  var planeMaxSpeed = 1.6;
+  game.planeSpeed = normalize(mousePos.x,-.5,.5, planeMinSpeed, planeMaxSpeed);
   var targetY = normalize(mousePos.y,-.75,.75,game.planeDefaultHeight-game.planeAmpHeight, game.planeDefaultHeight+game.planeAmpHeight);
   var targetX = normalize(mousePos.x,-1,1,-game.planeAmpWidth*.7, -game.planeAmpWidth);
 
   game.planeCollisionDisplacementX += game.planeCollisionSpeedX;
   targetX += game.planeCollisionDisplacementX;
-
 
   game.planeCollisionDisplacementY += game.planeCollisionSpeedY;
   targetY += game.planeCollisionDisplacementY;
@@ -560,7 +315,6 @@ function updatePlane(){
 
   airplane.mesh.rotation.z = (targetY-airplane.mesh.position.y)*deltaTime*game.planeRotXSensivity;
   airplane.mesh.rotation.x = (airplane.mesh.position.y-targetY)*deltaTime*game.planeRotZSensivity;
-  var targetCameraZ = normalize(game.planeSpeed, game.planeMinSpeed, game.planeMaxSpeed, game.cameraNearPos, game.cameraFarPos);
   camera.fov = normalize(mousePos.x,-1,1,40, 80);
   camera.updateProjectionMatrix ()
   camera.position.y += (airplane.mesh.position.y - camera.position.y)*deltaTime*game.cameraSensivity;
@@ -574,26 +328,14 @@ function updatePlane(){
 function showReplay(){
   replayMessage.style.display="block";
 }
-
 function hideReplay(){
   replayMessage.style.display="none";
-}
-
-function normalize(v,vmin,vmax,tmin, tmax){
-  var nv = Math.max(Math.min(v,vmax), vmin);
-  var dv = vmax-vmin;
-  var pc = (nv-vmin)/dv;
-  var dt = tmax-tmin;
-  var tv = tmin + (pc*dt);
-  return tv;
 }
 
 var fieldDistance, energyBar, replayMessage, fieldLevel, levelCircle;
 
 function init(event){
-
   // UI
-
   fieldDistance = document.getElementById("distValue");
   energyBar = document.getElementById("energyBar");
   replayMessage = document.getElementById("replayMessage");
@@ -601,19 +343,16 @@ function init(event){
   levelCircle = document.getElementById("levelCircleStroke");
 
   resetGame();
-  createScene();
-
-  createLights();
-  createCoins();
   createEnnemies();
   createParticles();
 
-  document.addEventListener('mousemove', handleMouseMove, false);
-  document.addEventListener('touchmove', handleTouchMove, false);
   document.addEventListener('mouseup', handleMouseUp, false);
-  document.addEventListener('touchend', handleTouchEnd, false);
-
   loop();
 }
 
-window.addEventListener('load', init, false);
+function handleMouseUp(event){
+  if (game.status == "waitingReplay"){
+    resetGame();
+    hideReplay();
+  }
+}
