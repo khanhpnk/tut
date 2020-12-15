@@ -1,140 +1,142 @@
+function createPlane(){
+    airplane = new AirPlane();
+    airplane.mesh.scale.set(.25,.25,.25);
+    airplane.mesh.position.y = 100; // TODO: airplane.mesh.position.y = game.planeDefaultHeight;
+    scene.add(airplane.mesh);
+}
+
 var AirPlane = function(){
-  this.mesh = new THREE.Object3D();
-  this.mesh.name = "airPlane";
+    this.mesh = new THREE.Object3D();
+    this.mesh.name = "airPlane";
 
-  // Cabin
+    // Cabin
+    var geomCabin = new THREE.BoxGeometry(80,50,50,1,1,1);
+    var matCabin = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
 
-  var geomCabin = new THREE.BoxGeometry(80,50,50,1,1,1);
-  var matCabin = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
+    geomCabin.vertices[4].y-=10;
+    geomCabin.vertices[4].z+=20;
+    geomCabin.vertices[5].y-=10;
+    geomCabin.vertices[5].z-=20;
+    geomCabin.vertices[6].y+=30;
+    geomCabin.vertices[6].z+=20;
+    geomCabin.vertices[7].y+=30;
+    geomCabin.vertices[7].z-=20;
 
-  geomCabin.vertices[4].y-=10;
-  geomCabin.vertices[4].z+=20;
-  geomCabin.vertices[5].y-=10;
-  geomCabin.vertices[5].z-=20;
-  geomCabin.vertices[6].y+=30;
-  geomCabin.vertices[6].z+=20;
-  geomCabin.vertices[7].y+=30;
-  geomCabin.vertices[7].z-=20;
+    var cabin = new THREE.Mesh(geomCabin, matCabin);
+    cabin.castShadow = true;
+    cabin.receiveShadow = true;
+    this.mesh.add(cabin);
 
-  var cabin = new THREE.Mesh(geomCabin, matCabin);
-  cabin.castShadow = true;
-  cabin.receiveShadow = true;
-  this.mesh.add(cabin);
+    // Engine
+    var geomEngine = new THREE.BoxGeometry(20,50,50,1,1,1);
+    var matEngine = new THREE.MeshPhongMaterial({color:Colors.white, shading:THREE.FlatShading});
+    var engine = new THREE.Mesh(geomEngine, matEngine);
+    engine.position.x = 50;
+    engine.castShadow = true;
+    engine.receiveShadow = true;
+    this.mesh.add(engine);
 
-  // Engine
+    // Tail Plane
+    var geomTailPlane = new THREE.BoxGeometry(15,20,5,1,1,1);
+    var matTailPlane = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
+    var tailPlane = new THREE.Mesh(geomTailPlane, matTailPlane);
+    tailPlane.position.set(-40,20,0);
+    tailPlane.castShadow = true;
+    tailPlane.receiveShadow = true;
+    this.mesh.add(tailPlane);
 
-  var geomEngine = new THREE.BoxGeometry(20,50,50,1,1,1);
-  var matEngine = new THREE.MeshPhongMaterial({color:Colors.white, shading:THREE.FlatShading});
-  var engine = new THREE.Mesh(geomEngine, matEngine);
-  engine.position.x = 50;
-  engine.castShadow = true;
-  engine.receiveShadow = true;
-  this.mesh.add(engine);
+    // Wings
+    var geomSideWing = new THREE.BoxGeometry(30,5,120,1,1,1);
+    var matSideWing = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
+    var sideWing = new THREE.Mesh(geomSideWing, matSideWing);
+    sideWing.position.set(0,15,0);
+    sideWing.castShadow = true;
+    sideWing.receiveShadow = true;
+    this.mesh.add(sideWing);
 
-  // Tail Plane
+    var geomWindshield = new THREE.BoxGeometry(3,15,20,1,1,1);
+    var matWindshield = new THREE.MeshPhongMaterial({color:Colors.white,transparent:true, opacity:.3, shading:THREE.FlatShading});;
+    var windshield = new THREE.Mesh(geomWindshield, matWindshield);
+    windshield.position.set(5,27,0);
 
-  var geomTailPlane = new THREE.BoxGeometry(15,20,5,1,1,1);
-  var matTailPlane = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
-  var tailPlane = new THREE.Mesh(geomTailPlane, matTailPlane);
-  tailPlane.position.set(-40,20,0);
-  tailPlane.castShadow = true;
-  tailPlane.receiveShadow = true;
-  this.mesh.add(tailPlane);
+    windshield.castShadow = true;
+    windshield.receiveShadow = true;
 
-  // Wings
+    this.mesh.add(windshield);
 
-  var geomSideWing = new THREE.BoxGeometry(30,5,120,1,1,1);
-  var matSideWing = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
-  var sideWing = new THREE.Mesh(geomSideWing, matSideWing);
-  sideWing.position.set(0,15,0);
-  sideWing.castShadow = true;
-  sideWing.receiveShadow = true;
-  this.mesh.add(sideWing);
+    var geomPropeller = new THREE.BoxGeometry(20,10,10,1,1,1);
+    geomPropeller.vertices[4].y-=5;
+    geomPropeller.vertices[4].z+=5;
+    geomPropeller.vertices[5].y-=5;
+    geomPropeller.vertices[5].z-=5;
+    geomPropeller.vertices[6].y+=5;
+    geomPropeller.vertices[6].z+=5;
+    geomPropeller.vertices[7].y+=5;
+    geomPropeller.vertices[7].z-=5;
+    var matPropeller = new THREE.MeshPhongMaterial({color:Colors.brown, shading:THREE.FlatShading});
+    this.propeller = new THREE.Mesh(geomPropeller, matPropeller);
 
-  var geomWindshield = new THREE.BoxGeometry(3,15,20,1,1,1);
-  var matWindshield = new THREE.MeshPhongMaterial({color:Colors.white,transparent:true, opacity:.3, shading:THREE.FlatShading});;
-  var windshield = new THREE.Mesh(geomWindshield, matWindshield);
-  windshield.position.set(5,27,0);
+    this.propeller.castShadow = true;
+    this.propeller.receiveShadow = true;
 
-  windshield.castShadow = true;
-  windshield.receiveShadow = true;
+    var geomBlade = new THREE.BoxGeometry(1,80,10,1,1,1);
+    var matBlade = new THREE.MeshPhongMaterial({color:Colors.brownDark, shading:THREE.FlatShading});
+    var blade1 = new THREE.Mesh(geomBlade, matBlade);
+    blade1.position.set(8,0,0);
 
-  this.mesh.add(windshield);
+    blade1.castShadow = true;
+    blade1.receiveShadow = true;
 
-  var geomPropeller = new THREE.BoxGeometry(20,10,10,1,1,1);
-  geomPropeller.vertices[4].y-=5;
-  geomPropeller.vertices[4].z+=5;
-  geomPropeller.vertices[5].y-=5;
-  geomPropeller.vertices[5].z-=5;
-  geomPropeller.vertices[6].y+=5;
-  geomPropeller.vertices[6].z+=5;
-  geomPropeller.vertices[7].y+=5;
-  geomPropeller.vertices[7].z-=5;
-  var matPropeller = new THREE.MeshPhongMaterial({color:Colors.brown, shading:THREE.FlatShading});
-  this.propeller = new THREE.Mesh(geomPropeller, matPropeller);
+    var blade2 = blade1.clone();
+    blade2.rotation.x = Math.PI/2;
 
-  this.propeller.castShadow = true;
-  this.propeller.receiveShadow = true;
+    blade2.castShadow = true;
+    blade2.receiveShadow = true;
 
-  var geomBlade = new THREE.BoxGeometry(1,80,10,1,1,1);
-  var matBlade = new THREE.MeshPhongMaterial({color:Colors.brownDark, shading:THREE.FlatShading});
-  var blade1 = new THREE.Mesh(geomBlade, matBlade);
-  blade1.position.set(8,0,0);
+    this.propeller.add(blade1);
+    this.propeller.add(blade2);
+    this.propeller.position.set(60,0,0);
+    this.mesh.add(this.propeller);
 
-  blade1.castShadow = true;
-  blade1.receiveShadow = true;
+    var wheelProtecGeom = new THREE.BoxGeometry(30,15,10,1,1,1);
+    var wheelProtecMat = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
+    var wheelProtecR = new THREE.Mesh(wheelProtecGeom,wheelProtecMat);
+    wheelProtecR.position.set(25,-20,25);
+    this.mesh.add(wheelProtecR);
 
-  var blade2 = blade1.clone();
-  blade2.rotation.x = Math.PI/2;
+    var wheelTireGeom = new THREE.BoxGeometry(24,24,4);
+    var wheelTireMat = new THREE.MeshPhongMaterial({color:Colors.brownDark, shading:THREE.FlatShading});
+    var wheelTireR = new THREE.Mesh(wheelTireGeom,wheelTireMat);
+    wheelTireR.position.set(25,-28,25);
 
-  blade2.castShadow = true;
-  blade2.receiveShadow = true;
+    var wheelAxisGeom = new THREE.BoxGeometry(10,10,6);
+    var wheelAxisMat = new THREE.MeshPhongMaterial({color:Colors.brown, shading:THREE.FlatShading});
+    var wheelAxis = new THREE.Mesh(wheelAxisGeom,wheelAxisMat);
+    wheelTireR.add(wheelAxis);
 
-  this.propeller.add(blade1);
-  this.propeller.add(blade2);
-  this.propeller.position.set(60,0,0);
-  this.mesh.add(this.propeller);
+    this.mesh.add(wheelTireR);
 
-  var wheelProtecGeom = new THREE.BoxGeometry(30,15,10,1,1,1);
-  var wheelProtecMat = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
-  var wheelProtecR = new THREE.Mesh(wheelProtecGeom,wheelProtecMat);
-  wheelProtecR.position.set(25,-20,25);
-  this.mesh.add(wheelProtecR);
+    var wheelProtecL = wheelProtecR.clone();
+    wheelProtecL.position.z = -wheelProtecR.position.z ;
+    this.mesh.add(wheelProtecL);
 
-  var wheelTireGeom = new THREE.BoxGeometry(24,24,4);
-  var wheelTireMat = new THREE.MeshPhongMaterial({color:Colors.brownDark, shading:THREE.FlatShading});
-  var wheelTireR = new THREE.Mesh(wheelTireGeom,wheelTireMat);
-  wheelTireR.position.set(25,-28,25);
+    var wheelTireL = wheelTireR.clone();
+    wheelTireL.position.z = -wheelTireR.position.z;
+    this.mesh.add(wheelTireL);
 
-  var wheelAxisGeom = new THREE.BoxGeometry(10,10,6);
-  var wheelAxisMat = new THREE.MeshPhongMaterial({color:Colors.brown, shading:THREE.FlatShading});
-  var wheelAxis = new THREE.Mesh(wheelAxisGeom,wheelAxisMat);
-  wheelTireR.add(wheelAxis);
+    var wheelTireB = wheelTireR.clone();
+    wheelTireB.scale.set(.5,.5,.5);
+    wheelTireB.position.set(-35,-5,0);
+    this.mesh.add(wheelTireB);
 
-  this.mesh.add(wheelTireR);
+    var suspensionGeom = new THREE.BoxGeometry(4,20,4);
+    suspensionGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0,10,0))
+    var suspensionMat = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
+    var suspension = new THREE.Mesh(suspensionGeom,suspensionMat);
+    suspension.position.set(-35,-5,0);
+    suspension.rotation.z = -.3;
+    this.mesh.add(suspension);
 
-  var wheelProtecL = wheelProtecR.clone();
-  wheelProtecL.position.z = -wheelProtecR.position.z ;
-  this.mesh.add(wheelProtecL);
-
-  var wheelTireL = wheelTireR.clone();
-  wheelTireL.position.z = -wheelTireR.position.z;
-  this.mesh.add(wheelTireL);
-
-  var wheelTireB = wheelTireR.clone();
-  wheelTireB.scale.set(.5,.5,.5);
-  wheelTireB.position.set(-35,-5,0);
-  this.mesh.add(wheelTireB);
-
-  var suspensionGeom = new THREE.BoxGeometry(4,20,4);
-  suspensionGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0,10,0))
-  var suspensionMat = new THREE.MeshPhongMaterial({color:Colors.red, shading:THREE.FlatShading});
-  var suspension = new THREE.Mesh(suspensionGeom,suspensionMat);
-  suspension.position.set(-35,-5,0);
-  suspension.rotation.z = -.3;
-  this.mesh.add(suspension);
-
-  this.mesh.castShadow = true;
-  this.mesh.receiveShadow = true;
-
+    this.mesh.castShadow = true;
+    this.mesh.receiveShadow = true;
 };
