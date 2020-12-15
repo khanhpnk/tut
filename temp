@@ -1,2 +1,11 @@
 As you can see in the example above,
 Let me explain the purpose of each directory
+----------------
+Why should I write my own framework?
+
+This tutorial is by no means a comprehensive/definitive solution to your framework needs. There are a lot of good php frameworks out there.
+
+So why should you write your own framework? Firstly, it is a great learning experience. You will get to learn PHP inside-out. You will get to learn object-oriented programming, design patterns and considerations.
+
+More importantly, you have complete control over your framework. Your ideas can be built right into your framework. Although always not beneficial, you can write coding conventions/functions/modules the way you like.
+
