@@ -1,0 +1,15 @@
+{
+    "name": "admin/mvc",
+    "authors": [
+        {
+            "name": "Pham Ngoc Khanh",
+            "email": "phamngockhanh262@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "": "app/"
+        }
+    }
+}
