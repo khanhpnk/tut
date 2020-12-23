@@ -1,11 +1,8 @@
-function createSea(){
-    sea = new Sea();
-    sea.mesh.position.y = -600;
-    scene.add(sea.mesh);
-}
+const SEA_COLOR     = Colors.blue;      // Màu sóng biển
+const SEA_ROTATE    = game.speed*2;     // Tốc độ sóng biển
 
 /**
- * Định nghĩa biển
+ * Vẽ biển
  * @constructor
  */
 Sea = function(){
@@ -14,21 +11,21 @@ Sea = function(){
     geom.mergeVertices();
     var l = geom.vertices.length;
 
-    this.waves = []; // sóng biển
+    this.waves = [];
     for (var i=0;i<l;i++){
         var v = geom.vertices[i];
         this.waves.push({y:v.y,
             x:v.x,
             z:v.z,
             ang:Math.random()*Math.PI*2,
-            amp:5 + Math.random()*15,
-            speed:0.016 + Math.random()*0.032
+            amp: 5 + Math.random()*15, // Độ nhấp nhô của sóng
+            speed: SEA_ROTATE
         });
     };
     var mat = new THREE.MeshPhongMaterial({
-        color:Colors.blue, // màu sóng biển
+        color: SEA_COLOR,
         transparent:true,
-        opacity:.8,
+        opacity:.9,
         shading:THREE.FlatShading,
     });
 
@@ -37,7 +34,8 @@ Sea = function(){
 }
 
 /**
- * Định nghĩa di chuyển sóng biển
+ * Di chuyển sóng biển nhấp nhô
+ * @public
  */
 Sea.prototype.moveWaves = function (){
     var verts = this.mesh.geometry.vertices;
@@ -47,8 +45,17 @@ Sea.prototype.moveWaves = function (){
         var vprops = this.waves[i];
         v.x =  vprops.x + Math.cos(vprops.ang)*vprops.amp;
         v.y = vprops.y + Math.sin(vprops.ang)*vprops.amp;
-        vprops.ang += vprops.speed; // TODO: vprops.ang += vprops.speed*deltaTime;
+        vprops.ang += vprops.speed;
     }
     this.mesh.geometry.verticesNeedUpdate=true;
-    sea.mesh.rotation.z += game.speed/5;
+}
+
+/**
+ * Tạo biển
+ * @public
+ */
+function createSea(){
+    sea = new Sea();
+    sea.mesh.position.y = -600;
+    scene.add(sea.mesh);
 }

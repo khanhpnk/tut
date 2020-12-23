@@ -1,4 +1,8 @@
-var Colors = {
+let game = {
+    speed: 0.02, // Tốc độ game
+};
+
+const Colors = {
     red:0xf25346,
     white:0xd8d0d1,
     brown:0x59332e,
@@ -37,10 +41,10 @@ function createScene() {
 
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT, 1, 10000);
-    scene.fog = new THREE.Fog(0xf7d9aa, 100,950); // sương mù
+    scene.fog = new THREE.Fog(0xf7d9aa, 200,950); // sương mù
     camera.position.x = 0;
     camera.position.z = 200;
-    camera.position.y = game.planeDefaultHeight;
+    camera.position.y = 100;
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(WIDTH, HEIGHT);
@@ -67,4 +71,8 @@ function createLights() {
     scene.add(hemisphereLight);
     scene.add(shadowLight);
     scene.add(ambientLight);
+}
+
+function random (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

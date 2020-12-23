@@ -1,18 +1,16 @@
-const AIRPLANE_CABIN_COLOR      = Colors.red;       // Thân máy bay
-const AIRPLANE_ENGINE_COLOR     = Colors.white;     // Đầu máy bay
-const AIRPLANE_TAIL_COLOR       = Colors.red;       // Đuôi máy bay
-const AIRPLANE_WING_COLOR       = Colors.red;       // Cánh máy bay
-const AIRPLANE_PROPELLER_COLOR  = Colors.brown;     // Cánh quạt máy bay
-const AIRPLANE_WHEEL_TIRE_COLOR  = Colors.brownDark; // Lốp máy bay
-const AIRPLANE_WHEEL_AXIS_COLOR  = Colors.brown;     // Bánh xe máy bay
+const AIRPLANE_CABIN_COLOR       = Colors.red;              // Thân máy bay
+const AIRPLANE_ENGINE_COLOR      = Colors.white;            // Đầu máy bay
+const AIRPLANE_TAIL_COLOR        = Colors.red;              // Đuôi máy bay
+const AIRPLANE_WING_COLOR        = Colors.red;              // Cánh máy bay
+const AIRPLANE_PROPELLER_COLOR   = Colors.brown;            // Cánh quạt máy bay
+const AIRPLANE_WHEEL_TIRE_COLOR  = Colors.brownDark;        // Lốp máy bay
+const AIRPLANE_WHEEL_AXIS_COLOR  = Colors.brown;            // Bánh xe máy bay
+const AIRPLANE_HEIGHT            = 100;                     // Độ cao ban đầu của máy bay
+const AIRPLANE_PROPELLER_ROTATE  = game.speed * 10;         // Tốc độ quay của cánh quạt máy bay
 
-function createPlane(){
-    airplane = new AirPlane();
-    airplane.mesh.scale.set(.25,.25,.25);
-    airplane.mesh.position.y = game.planeDefaultHeight;
-    scene.add(airplane.mesh);
-}
-
+/**
+ * Vẽ máy bay
+ */
 var AirPlane = function(){
     this.mesh = new THREE.Object3D();
     this.mesh.name = "airPlane";
@@ -127,3 +125,22 @@ var AirPlane = function(){
     this.mesh.castShadow = true;
     this.mesh.receiveShadow = true;
 };
+
+/**
+ * Tạo máy bay
+ * @public
+ */
+function createPlane(){
+    airplane = new AirPlane();
+    airplane.mesh.scale.set(.25,.25,.25);
+    airplane.mesh.position.y = AIRPLANE_HEIGHT;
+    scene.add(airplane.mesh);
+}
+
+/**
+ * Xoay cánh máy bay
+ * @public
+ */
+AirPlane.prototype.movePropeller = function(){
+    this.propeller.rotation.x += AIRPLANE_PROPELLER_ROTATE;
+}

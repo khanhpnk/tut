@@ -1,16 +1,15 @@
-function createSky(){
-    sky = new Sky();
-    sky.mesh.position.y = -600;
-    scene.add(sky.mesh);
-}
+const CLOUD_ROTATE    = game.speed;      // Tốc độ quay của mây
+const CLOUD_NUMBER    = 20;              // Số chùm mây
+const CLOUD_COLOR     = Colors.white;    // Màu chùm mây
+const CLOUD_FNUMBER   = 3                // Số đám mây trong mỗi chùm mây (từ)
+const CLOUD_TNUMBER   = 6                // Số đám mây trong mỗi chùm mây (đến)
 
 /**
- * Định nghĩa bầu trời gồm nhiều chùm mây
- * @constructor
+ * Vẽ bầu trời
  */
 Sky = function(){
     this.mesh = new THREE.Object3D();
-    this.nClouds = 10; // Định nghĩa tổng cộng 10 chùm mây
+    this.nClouds = CLOUD_NUMBER;
     this.clouds = [];
     var stepAngle = Math.PI*2 / this.nClouds;
     for(var i=0; i<this.nClouds; i++){
@@ -29,29 +28,17 @@ Sky = function(){
 }
 
 /**
- * Xoay tất cả mây trên bầu trời
- */
-Sky.prototype.moveClouds = function(){
-    for(var i=0; i<this.nClouds; i++){
-        var c = this.clouds[i];
-        c.rotate();
-    }
-    this.mesh.rotation.z += game.speed; // TODO: this.mesh.rotation.z += game.speed*deltaTime;
-}
-
-/**
- * Định nghĩa 1 chùm mây
- * @constructor
+ * Vẽ một chùm mây
  */
 Cloud = function(){
     this.mesh = new THREE.Object3D();
     this.mesh.name = "cloud";
     var geom = new THREE.CubeGeometry(20,20,20); // Mây hình khối lập phương
     var mat = new THREE.MeshPhongMaterial({
-        color:Colors.white, // Mây màu trắng
+        color: CLOUD_COLOR
     });
 
-    var nBlocs = 3+Math.floor(Math.random()*3); // Số đám mây trong chùm mây từ 3 - 6
+    var nBlocs = random(CLOUD_FNUMBER, CLOUD_TNUMBER);
     for (var i=0; i<nBlocs; i++ ){
         var m = new THREE.Mesh(geom.clone(), mat);
         m.position.x = i*15;
@@ -68,7 +55,7 @@ Cloud = function(){
 }
 
 /**
- * Xoay một đám mây
+ * Xoay các đám mây trong một chùm mây
  */
 Cloud.prototype.rotate = function(){
     var l = this.mesh.children.length;
@@ -77,4 +64,26 @@ Cloud.prototype.rotate = function(){
         m.rotation.z+= Math.random()*.005*(i+1);
         m.rotation.y+= Math.random()*.002*(i+1);
     }
+}
+
+/**
+ * Tạo bầu trời
+ * @public
+ */
+function createSky(){
+    sky = new Sky();
+    sky.mesh.position.y = -600;
+    scene.add(sky.mesh);
+}
+
+/**
+ * Xoay tất cả chùm mây trên bầu trời
+ * @public
+ */
+Sky.prototype.moveClouds = function(){
+    for(var i=0; i<this.nClouds; i++){
+        var c = this.clouds[i];
+        c.rotate();
+    }
+    this.mesh.rotation.z += CLOUD_ROTATE;
 }
