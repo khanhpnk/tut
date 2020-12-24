@@ -3,13 +3,29 @@ var HEIGHT, WIDTH;
 var sea, sky, airplane;
 var mousePos = { x: 0, y: 0 };
 
-function loop(){
-  updatePlane();
-  sea.moveWaves();
-  sky.moveClouds();
-  airplane.movePropeller();
+var deltaTime = 0;
+var newTime = new Date().getTime();
+var oldTime = new Date().getTime();
 
-  renderer.render(scene, camera);
+var fieldDistance, energyBar, replayMessage, fieldLevel, levelCircle;
+
+function loop(){
+  newTime = new Date().getTime();
+  deltaTime = newTime-oldTime;
+  oldTime = newTime;
+
+  game.distance += game.speed*deltaTime
+  fieldDistance.innerHTML = Math.floor(game.distance);
+
+  if (game.distance < 10000 || game.distance > 20000)
+  {
+    updatePlane();
+    sea.moveWaves();
+    sky.moveClouds();
+    airplane.movePropeller();
+    renderer.render(scene, camera);
+  }
+
   requestAnimationFrame(loop);
 }
 
@@ -28,6 +44,8 @@ function resetGame(){
 }
 
 function init(){
+  fieldDistance = document.getElementById("distValue");
+
   document.addEventListener('mousemove', handleMouseMove, false); // Bắt sự kiện di chuyển chuột
   resetGame();
 

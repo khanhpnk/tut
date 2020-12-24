@@ -1,5 +1,6 @@
 let game = {
-    speed: 0.02, // Tốc độ game
+    speed: .00035, // Tốc độ game
+    distance: 0
 };
 
 const Colors = {
