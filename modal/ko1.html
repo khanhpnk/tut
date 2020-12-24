@@ -1,0 +1,20 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>DEMOS</title>
+    <script src="knockout-3.5.1.js"></script>
+</head>
+<body>
+    <p>First name: <strong data-bind="text: firstName"></strong></p>
+    <p>Last name: <strong data-bind="text: lastName"></strong></p>
+    <script>
+        function AppViewModel() {
+            this.firstName = "Bert";
+            this.lastName = "Bertington";
+        }
+        ko.applyBindings(new AppViewModel());
+    </script>
+</body>
+</html>
