@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <script src="knockout-3.5.1.js"></script>
+</head>
+<body>
+    <h3>"foreach" blinding assigning to HTML element</h3>
+    <table>
+        <thead>
+        <tr><th>First name</th><th>Last name</th></tr>
+        </thead>
+        <tbody data-bind="foreach: people">
+        <tr>
+            <td data-bind="text: firstName"></td>
+            <td data-bind="text: lastName"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>"foreach" blinding without assigning to HTML element</h3>
+    <table>
+        <thead>
+        <tr><th>First name</th><th>Last name</th></tr>
+        </thead>
+        <tbody>
+        <!-- ko foreach: people -->
+        <tr>
+            <td data-bind="text: firstName"></td>
+            <td data-bind="text: lastName"></td>
+        </tr>
+        <!-- /ko -->
+        </tbody>
+    </table>
+
+<script type="text/javascript">
+    function ViewModel() {
+        this.people = [
+            { firstName: 'Bert', lastName: 'Bertington' },
+            { firstName: 'Charles', lastName: 'Charlesforth' },
+            { firstName: 'Denise', lastName: 'Dentiste' }
+        ];
+    }
+    ko.applyBindings(new ViewModel());
+</script>
+</body>
+</html>

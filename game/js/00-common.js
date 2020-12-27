@@ -1,5 +1,5 @@
 let game = {
-    speed: .00035, // Tốc độ game
+    speed: .002, // Tốc độ game
     distance: 0
 };
 

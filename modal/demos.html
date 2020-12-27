@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>DEMOS</title>
-        <link rel="stylesheet" href="css/animate.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.min.css">
         <style>
             label.radio {
                 cursor: pointer
@@ -40,7 +40,7 @@
         </style>
     </head>
     <body>
-        <a id="demo02" href="#animatedModal">DEMO02</a>
+        <a id="demo02" href="#animatedModal" data-bind="click: addPerson">DEMO02</a>
 
         <div id="animatedModal">
             <div class="modal-content">
@@ -50,30 +50,22 @@
                             <div class="border">
                                 <div class="question bg-white p-3 border-bottom">
                                     <div class="d-flex flex-row justify-content-between align-items-center mcq">
-                                        <h4>MCQ Quiz</h4><span>(5 of 20)</span>
+                                        <h4>Quiz</h4><span data-bind="text: title"></span>
                                     </div>
                                 </div>
                                 <div class="question bg-white p-3 border-bottom">
                                     <div class="d-flex flex-row align-items-center question-title">
-                                        <h3 class="text-danger">1.</h3>
-                                        <h4 class="mt-1 ml-2">Which of the following country has largest population?</h4>
+                                        <h3 class="text-danger" data-bind="text: number">.</h3>
+                                        <h4 class="mt-1 ml-2" data-bind="text: question"></h4>
                                     </div>
-                                    <div class="ans ml-2">
-                                        <label class="radio"> <input type="radio" name="brazil" value="brazil"> <span>Which of the following country has largest population?</span>
-                                        </label>
-                                    </div>
-                                    <div class="ans ml-2">
-                                        <label class="radio"> <input type="radio" name="brazil" value="Germany"> <span>Which of the following country has largest population?</span>
-                                        </label>
-                                    </div>
-                                    <div class="ans ml-2">
-                                        <label class="radio"> <input type="radio" name="brazil" value="Indonesia"> <span>Which of the following country has largest population?</span>
-                                        </label>
-                                    </div>
-                                    <div class="ans ml-2">
-                                        <label class="radio"> <input type="radio" name="brazil" value="Russia"> <span>Which of the following country has largest population?</span>
-                                        </label>
-                                    </div>
+                                        <!-- ko foreach: answer -->
+                                        <div class="ans ml-2">
+                                            <label class="radio">
+                                                <input type="radio" name="brazil" data-bind="value: result">
+                                                <span data-bind="text: content"></span>
+                                            </label>
+                                        </div>
+                                        <!-- /ko -->
                                 </div>
                                 <div class="p-3 text-center">
                                     <button id="btn-close-modal" class="btn btn-success close-animatedModal" type="button">Trả lời câu hỏi</button>
@@ -86,8 +78,41 @@
         </div>
 
         <script src="js/jquery.min.js"></script>
+        <script src="js/knockout-3.5.1.js"></script>
         <script src="js/animatedModal.js"></script>
         <script>
+            function PersonsViewModel() {
+                this.qaList = [
+                    {
+                        question : 'Which of the following country has largest population 1?',
+                        answer : [
+                            {content : 'Which', result : '1'},
+                            {content : 'Which', result : '1'},
+                            {content : 'Which', result : '1'},
+                            {content : 'Which', result : '1'},
+                        ]
+                    }
+                ];
+                this.i = 0;
+                this.number = ko.observable(1);
+                this.total = this.qaList.length;
+
+                this.question = ko.observable();
+                this.answer = ko.observableArray();
+
+                this.title = ko.computed(function() {
+                    return '(Câu ' + this.number() + ' trên tổng số ' + this.total + ' câu hỏi)';
+                }, this);
+
+                this.addPerson = function() {
+                    this.question(this.qaList[this.i].question);
+                    this.answer(this.qaList[this.i].answer);
+                    this.number(++this.i);
+                }
+            }
+
+            ko.applyBindings(new PersonsViewModel());
+
             $("#demo02").animatedModal({
                 animatedIn:'lightSpeedIn',
                 animatedOut:'bounceOutDown',

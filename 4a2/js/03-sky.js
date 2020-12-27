@@ -1,4 +1,3 @@
-const CLOUD_ROTATE    = game.speed * 50;      // Tốc độ quay của mây
 const CLOUD_NUMBER    = 20;              // Số chùm mây
 const CLOUD_COLOR     = Colors.white;    // Màu chùm mây
 const CLOUD_FNUMBER   = 3                // Số đám mây trong mỗi chùm mây (từ)
@@ -16,7 +15,7 @@ Sky = function(){
         var c = new Cloud();
         this.clouds.push(c);
         var a = stepAngle*i;
-        var h = 750 + Math.random()*200;
+        var h = game.seaRadius + 150 + Math.random()*200;
         c.mesh.position.y = Math.sin(a)*h;
         c.mesh.position.x = Math.cos(a)*h;
         c.mesh.position.z = -300-Math.random()*500;
@@ -52,20 +51,6 @@ Cloud = function(){
     }
 }
 
-/**
- * Tạo bầu trời
- * @public
- */
-function createSky(){
-    sky = new Sky();
-    sky.mesh.position.y = -600;
-    scene.add(sky.mesh);
-}
-
-/**
- * Xoay tất cả chùm mây trên bầu trời
- * @public
- */
 Sky.prototype.moveClouds = function(){
-    this.mesh.rotation.z += CLOUD_ROTATE;
+    this.mesh.rotation.z += game.speed*deltaTime;
 }
