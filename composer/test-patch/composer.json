@@ -1,0 +1,29 @@
+{
+    "name": "khanhpn/test-patch",
+    "authors": [
+        {
+            "name": "khanhpn",
+            "email": "khanhpn7187@co-well.com.vn"
+        }
+    ],
+    "require": {
+        "cweagans/composer-patches": "^1.7",
+        "psr/log": "^1.1"
+    },
+    "replace": {
+        "psr/log": "^1.1"
+    },
+    "extra": {
+        "composer-exit-on-patch-failure": true,
+        "patches": {
+            "psr/log": {
+                "GITHUB-9139: Unable to save": "patches/github-issue-1.patch"
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "": "lib"
+        }
+    }
+}

@@ -1,0 +1,22 @@
+From fa95b0f42b7d565c30f67659a37e0aba2f33f5d7 Mon Sep 17 00:00:00 2001
+From: khanhpn <khanhpn7187@co-well.com.vn>
+Date: Mon, 28 Dec 2020 15:54:43 +0700
+Subject: [PATCH] Commit explaining the changes contained in the patch
+
+---
+ Psr/Log/LogLevel.php | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Psr/Log/LogLevel.php b/Psr/Log/LogLevel.php
+index 9cebcac..a050263 100644
+--- a/Psr/Log/LogLevel.php
++++ b/Psr/Log/LogLevel.php
+@@ -15,4 +15,5 @@ class LogLevel
+     const NOTICE    = 'notice';
+     const INFO      = 'info';
+     const DEBUG     = 'debug';
++    const DEBUGT     = 'debugt';
+ }
+-- 
+2.25.1
+
