@@ -1,6 +1,6 @@
 
 Sea = function(){
-    var geom = new THREE.CylinderGeometry(game.seaRadius,game.seaRadius,game.seaLength,40,10);
+    var geom = new THREE.CylinderGeometry(seaRadius,seaRadius,800,40,10);
     geom.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI/2));
     geom.mergeVertices();
     var l = geom.vertices.length;
@@ -13,8 +13,8 @@ Sea = function(){
             x:v.x,
             z:v.z,
             ang:Math.random()*Math.PI*2,
-            amp:game.wavesMinAmp + Math.random()*(game.wavesMaxAmp-game.wavesMinAmp),
-            speed:game.wavesMinSpeed + Math.random()*(game.wavesMaxSpeed - game.wavesMinSpeed)
+            amp: 5 + Math.random()*(20 - 5),
+            speed: 0.002
         });
     };
     var mat = new THREE.MeshPhongMaterial({

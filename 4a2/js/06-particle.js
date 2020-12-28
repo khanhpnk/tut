@@ -29,7 +29,6 @@ Particle.prototype.explode = function(pos, color, scale){
 
 ParticlesHolder = function (){
     this.mesh = new THREE.Object3D();
-    this.particlesInUse = [];
 }
 
 ParticlesHolder.prototype.spawnParticles = function(pos, density, color, scale){

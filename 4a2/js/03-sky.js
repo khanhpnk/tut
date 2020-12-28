@@ -15,7 +15,7 @@ Sky = function(){
         var c = new Cloud();
         this.clouds.push(c);
         var a = stepAngle*i;
-        var h = game.seaRadius + 150 + Math.random()*200;
+        var h = seaRadius + 150 + Math.random()*200;
         c.mesh.position.y = Math.sin(a)*h;
         c.mesh.position.x = Math.cos(a)*h;
         c.mesh.position.z = -300-Math.random()*500;

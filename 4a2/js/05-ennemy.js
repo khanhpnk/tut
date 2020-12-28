@@ -29,8 +29,8 @@ EnnemiesHolder.prototype.spawnEnnemies = function(){
         }
 
         ennemy.angle = - (i*0.1);
-        ennemy.distance = game.seaRadius + game.planeDefaultHeight + (-1 + Math.random() * 2) * (game.planeAmpHeight-20);
-        ennemy.mesh.position.y = -game.seaRadius + Math.sin(ennemy.angle)*ennemy.distance;
+        ennemy.distance = seaRadius + planeDefaultHeight + (-1 + Math.random() * 2) * (planeAmpHeight-20);
+        ennemy.mesh.position.y = -seaRadius + Math.sin(ennemy.angle)*ennemy.distance;
         ennemy.mesh.position.x = Math.cos(ennemy.angle)*ennemy.distance;
 
         this.mesh.add(ennemy.mesh);
@@ -41,18 +41,18 @@ EnnemiesHolder.prototype.spawnEnnemies = function(){
 EnnemiesHolder.prototype.rotateEnnemies = function(){
     for (var i=0; i<this.ennemiesInUse.length; i++){
         var ennemy = this.ennemiesInUse[i];
-        ennemy.angle += game.speed*deltaTime*game.ennemiesSpeed;
+        ennemy.angle += game.speed*deltaTime * ennemiesSpeed;
 
         if (ennemy.angle > Math.PI*2) ennemy.angle -= Math.PI*2;
 
-        ennemy.mesh.position.y = -game.seaRadius + Math.sin(ennemy.angle)*ennemy.distance;
+        ennemy.mesh.position.y = -seaRadius + Math.sin(ennemy.angle)*ennemy.distance;
         ennemy.mesh.position.x = Math.cos(ennemy.angle)*ennemy.distance;
         ennemy.mesh.rotation.z += Math.random()*.1;
         ennemy.mesh.rotation.y += Math.random()*.1;
 
         var diffPos = airplane.mesh.position.clone().sub(ennemy.mesh.position.clone());
         var d = diffPos.length();
-        if (d<game.ennemyDistanceTolerance){
+        if (d < ennemyDistanceTolerance){
             particlesHolder.spawnParticles(ennemy.mesh.position.clone(), 15, Colors.red, 3);
 
             ennemiesPool.unshift(this.ennemiesInUse.splice(i,1)[0]);
