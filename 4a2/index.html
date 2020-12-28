@@ -3,9 +3,6 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>The Aviator: The Game | Codrops</title>
-		<link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,700italic' rel='stylesheet' type='text/css'>
-
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/animate.min.css">
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
@@ -46,8 +43,8 @@
 	<body>
 		<div class="game-holder" id="gameHolder">
 			<div class="header">
-				<h1><span>the</span>Aviator</h1>
-				<h2>fly it to the end</h2>
+				<h1>Đưa người việt nam về nước</h1>
+				<h2>Máy bay cứu trợ mùa Covid-19</h2>
 				<div class="score" id="score">
 					<div class="score__content" id="level">
 						<div class="score__label">level</div>
@@ -70,11 +67,11 @@
 				</div>
 			</div>
 			<div class="world" id="world"></div>
-			<div class="message message--replay" id="replayMessage">Click to Replay</div>
+			<div class="message message--replay" id="replayMessage">Nhấn vào màn hình để chơi lại</div>
 			<div class="message message--instructions" id="instructions">Grab the blue pills<span>avoid the red ones</span></div>
 		</div>
 
-		<div id="animatedModal">
+		<div id="question-modal">
 			<div class="modal-content">
 				<div class="container mt-5">
 					<div class="d-flex justify-content-center row">
@@ -100,7 +97,7 @@
 									<!-- /ko -->
 								</div>
 								<div class="p-3 text-center">
-									<button id="btn-close-modal" class="btn btn-success close-animatedModal" type="button">Trả lời câu hỏi</button>
+									<button id="btn-close-modal" class="btn btn-success close-question-modal" type="button">Trả lời câu hỏi</button>
 								</div>
 							</div>
 						</div>
@@ -108,7 +105,7 @@
 				</div>
 			</div>
 		</div>
-		<a id="demo02" href="#animatedModal" data-bind="click: addPerson"></a>
+		<a id="question-display" href="#question-modal" data-bind="click: appendQuestion"></a>
 
 		<script src="js/lib/jquery.min.js"></script>
 		<script src="js/lib/knockout-3.5.1.js"></script>
@@ -121,55 +118,39 @@
 		<script src="js/01-air-plane.js" /></script>
 		<script src="js/02-sea.js" /></script>
 		<script src="js/03-sky.js" /></script>
+		<script src="js/04-coin.js" /></script>
+		<script src="js/05-ennemy.js" /></script>
+		<script src="js/05-particle.js" /></script>
+
 		<script>
 			function PersonsViewModel() {
-				this.qaList = [
-					{
-						question : 'Which of the following country has largest population 1?',
-						answer : [
-							{content : 'Which', result : '1'},
-							{content : 'Which', result : '1'},
-							{content : 'Which', result : '1'},
-							{content : 'Which', result : '1'},
-						]
-					}
-				];
 				this.i = 0;
 				this.number = ko.observable(1);
-				this.total = this.qaList.length;
-
 				this.question = ko.observable();
 				this.answer = ko.observableArray();
 
 				this.title = ko.computed(function() {
-					return '(Câu ' + this.number() + ' trên tổng số ' + this.total + ' câu hỏi)';
+					return '(Câu ' + this.number() + ' trên tổng số ' + QUESTION_NUMBER + ' câu hỏi)';
 				}, this);
 
-				this.addPerson = function() {
-					this.question(this.qaList[this.i].question);
-					this.answer(this.qaList[this.i].answer);
+				this.appendQuestion = function() {
+					console.log(111111);
+					this.question(QUESTION_LIST[this.i].question);
+					this.answer(QUESTION_LIST[this.i].answer);
 					this.number(++this.i);
 				}
 			}
-
 			ko.applyBindings(new PersonsViewModel());
-			$("#demo02").animatedModal({
+			$("#question-display").animatedModal({
 				animatedIn: 'lightSpeedIn',
 				animatedOut: 'bounceOutDown',
 				color: '#e2e3e5',
 				animationDuration: 1,
-				// Callbacks
 				beforeOpen: function () {
-					console.log("The animation was called");
-				},
-				afterOpen: function () {
-					console.log("The animation is completed");
-				},
-				beforeClose: function () {
-					console.log("The animation was called");
+
 				},
 				afterClose: function () {
-					console.log("The animation is completed");
+					game.status = "playing";
 				}
 			});
 		</script>
