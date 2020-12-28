@@ -1,38 +1,3 @@
-var Colors = {
-    red:0xf25346,
-    white:0xd8d0d1,
-    brown:0x59332e,
-    brownDark:0x23190f,
-    pink:0xF5986E,
-    yellow:0xf4ce93,
-    blue:0x68c3c0,
-};
-
-var deltaTime = 0;
-var newTime = new Date().getTime();
-var oldTime = new Date().getTime();
-var ennemiesPool = [];
-var particlesPool = [];
-
-const distanceForEnnemiesSpawn = 50;
-const ennemiesSpeed = .6;
-const ennemyValue = 10;
-const ennemyDistanceTolerance = 10;
-const distanceForCoinsSpawn = 100;
-const coinDistanceTolerance = 15;
-const coinValue = 3;
-const coinsSpeed = .5;
-const planeDefaultHeight = 100;
-const planeAmpHeight = 80;
-const planeAmpWidth = 75;
-const planeMoveSensivity = 0.005;
-const planeRotXSensivity = 0.0008;
-const planeRotZSensivity = 0.0004;
-const ratioSpeedDistance = 50;
-const ratioSpeedEnergy = 3;
-const distanceForLevelUpdate = 1000;
-const seaRadius = 600;
-
 function resetGame(){
   game = {
     speed:0,
@@ -42,7 +7,7 @@ function resetGame(){
     level:1,
     levelLastUpdate:0,
     planeFallSpeed:.001,
-    planeSpeed:0,
+    planeSpeed: 1.4,
     planeCollisionDisplacementX:0,
     planeCollisionSpeedX:0,
     planeCollisionDisplacementY:0,
@@ -54,22 +19,19 @@ function resetGame(){
   fieldLevel.innerHTML = Math.floor(game.level);
 }
 
-function handleMouseUp(event){
+function handleMouseUp(){
   if (game.status == "waitingReplay"){
     resetGame();
     replayMessage.style.display="none";
   }
 }
 
-function handleTouchEnd(event){
+function handleTouchEnd(){
   if (game.status == "waitingReplay"){
     resetGame();
     replayMessage.style.display="none";
   }
 }
-
-var sea;
-var airplane;
 
 function createPlane(){
   airplane = new AirPlane();
@@ -209,7 +171,6 @@ function removeEnergy(){
 }
 
 function updatePlane(){
-  game.planeSpeed = 1.4;
   var targetY = normalize(mousePos.y,-.75,.75,planeDefaultHeight- planeAmpHeight, planeDefaultHeight+planeAmpHeight);
   var targetX = normalize(mousePos.x,-1,1,- planeAmpWidth *.7, -planeAmpWidth);
 
@@ -235,7 +196,7 @@ function updatePlane(){
 }
 
 var fieldDistance, energyBar, replayMessage, fieldLevel, levelCircle;
-function init(event){
+function init(){
   fieldDistance = document.getElementById("distValue");
   energyBar = document.getElementById("energyBar");
   replayMessage = document.getElementById("replayMessage");
@@ -261,3 +222,34 @@ function init(event){
   loop();
 }
 window.addEventListener('load', init, false);
+
+function PersonsViewModel() {
+  this.i = 0;
+  this.number = ko.observable(1);
+  this.question = ko.observable();
+  this.answer = ko.observableArray();
+
+  this.title = ko.computed(function() {
+    return '(Câu ' + this.number() + ' trên tổng số ' + QUESTION_NUMBER + ' câu hỏi)';
+  }, this);
+
+  this.appendQuestion = function() {
+    console.log(111111);
+    this.question(QUESTION_LIST[this.i].question);
+    this.answer(QUESTION_LIST[this.i].answer);
+    this.number(++this.i);
+  }
+}
+ko.applyBindings(new PersonsViewModel());
+$("#question-display").animatedModal({
+  animatedIn: 'lightSpeedIn',
+  animatedOut: 'bounceOutDown',
+  color: '#e2e3e5',
+  animationDuration: 1,
+  beforeOpen: function () {
+
+  },
+  afterClose: function () {
+    game.status = "playing";
+  }
+});

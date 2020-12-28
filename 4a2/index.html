@@ -7,38 +7,6 @@
 		<link rel="stylesheet" href="css/animate.min.css">
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/game.css" />
-		<style>
-			label.radio {
-				cursor: pointer
-			}
-			label.radio input {
-				position: absolute;
-				top: 0;
-				left: 0;
-				visibility: hidden;
-				pointer-events: none
-			}
-			label.radio span {
-				padding: 8px 8px;
-				display: inline-block;
-				color: #000;
-				text-align: center;
-				border-radius: 3px;
-				margin-top: 4px;
-			}
-			label.radio input:checked+span {
-				border-color: #d6d8db;
-				background-color: #e2e3e5;
-				color: #383d41
-			}
-			.ans {
-				margin-left: 36px !important
-			}
-			.btn:focus {
-				outline: 0 !important;
-				box-shadow: none !important
-			}
-		</style>
 	</head>
 	<body>
 		<div class="game-holder" id="gameHolder">
@@ -121,38 +89,5 @@
 		<script src="js/04-coin.js" /></script>
 		<script src="js/05-ennemy.js" /></script>
 		<script src="js/06-particle.js" /></script>
-
-		<script>
-			function PersonsViewModel() {
-				this.i = 0;
-				this.number = ko.observable(1);
-				this.question = ko.observable();
-				this.answer = ko.observableArray();
-
-				this.title = ko.computed(function() {
-					return '(Câu ' + this.number() + ' trên tổng số ' + QUESTION_NUMBER + ' câu hỏi)';
-				}, this);
-
-				this.appendQuestion = function() {
-					console.log(111111);
-					this.question(QUESTION_LIST[this.i].question);
-					this.answer(QUESTION_LIST[this.i].answer);
-					this.number(++this.i);
-				}
-			}
-			ko.applyBindings(new PersonsViewModel());
-			$("#question-display").animatedModal({
-				animatedIn: 'lightSpeedIn',
-				animatedOut: 'bounceOutDown',
-				color: '#e2e3e5',
-				animationDuration: 1,
-				beforeOpen: function () {
-
-				},
-				afterClose: function () {
-					game.status = "playing";
-				}
-			});
-		</script>
 	</body>
 </html>

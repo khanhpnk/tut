@@ -180,3 +180,34 @@
 		letter-spacing: 0.65em;
 	}
 }
+
+label.radio {
+	cursor: pointer
+}
+label.radio input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+	pointer-events: none
+}
+label.radio span {
+	padding: 8px 8px;
+	display: inline-block;
+	color: #000;
+	text-align: center;
+	border-radius: 3px;
+	margin-top: 4px;
+}
+label.radio input:checked+span {
+	border-color: #d6d8db;
+	background-color: #e2e3e5;
+	color: #383d41
+}
+.ans {
+	margin-left: 36px !important
+}
+.btn:focus {
+	outline: 0 !important;
+	box-shadow: none !important
+}
