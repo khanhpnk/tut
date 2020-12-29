@@ -1,13 +1,11 @@
 function resetGame(){
   game = {
     speed:0,
-    baseSpeed:.00035,
     distance:0,
     energy:100,
     level:1,
     levelLastUpdate:0,
     planeFallSpeed:.001,
-    planeSpeed: 1.4,
     planeCollisionDisplacementX:0,
     planeCollisionSpeedX:0,
     planeCollisionDisplacementY:0,
@@ -77,11 +75,10 @@ function createParticles(){
 
 function loop(){
   newTime = new Date().getTime();
-  deltaTime = newTime-oldTime;
+  deltaTime = newTime-oldTime;// ~ 20
   oldTime = newTime;
 
   if (game.status=="playing"){
-    // Add energy coins every 100m;
     if (Math.floor(game.distance) % distanceForCoinsSpawn == 0 && Math.floor(game.distance) > game.coinLastSpawn){
       game.coinLastSpawn = Math.floor(game.distance);
       coinsHolder.spawnCoins();
@@ -103,10 +100,8 @@ function loop(){
     updatePlane();
     updateDistance();
     updateEnergy();
-    game.baseSpeed += (.00035 - game.baseSpeed) * deltaTime * 0.02;
-    game.speed = game.baseSpeed * game.planeSpeed;
-
-    airplane.propeller.rotation.x +=.2 + game.planeSpeed * deltaTime*.005;
+    game.speed = .0005;
+    airplane.propeller.rotation.x += deltaTime*game.speed*20;
   } else if(game.status=="gameover"){
     game.speed *= .99;
     airplane.mesh.rotation.z += (-Math.PI/2 - airplane.mesh.rotation.z)*.0002*deltaTime;
@@ -124,7 +119,6 @@ function loop(){
   }
 
   sea.mesh.rotation.z += game.speed*deltaTime;
-  if (sea.mesh.rotation.z > 2*Math.PI)  sea.mesh.rotation.z -= 2*Math.PI;
 
   coinsHolder.rotateCoins();
   ennemiesHolder.rotateEnnemies();
