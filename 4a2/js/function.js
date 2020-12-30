@@ -18,9 +18,9 @@ const QUESTION_LIST = [
   {
     question : 'Rửa tay như nào sẽ đảm bảo đã rửa tay sạch?',
     answer : [
-      {content : 'Miễn rửa tay với nước và xà phòng là được, bất kể trong bao lâu', result : '0'},
-      {content : 'Theo quy trình rửa tay thường quy 6 bước khuyến cáo bởi Bộ Y Tế để không bỏ sót bất cứ vị trí nào trên tay', result : '1'},
-      {content : 'Miễn có rửa tay là được', result : '0'},
+      {content : 'A. Miễn rửa tay với nước và xà phòng là được, bất kể trong bao lâu', result : '0'},
+      {content : 'B. Theo quy trình rửa tay thường quy 6 bước khuyến cáo bởi Bộ Y Tế để không bỏ sót bất cứ vị trí nào trên tay', result : '1'},
+      {content : 'C. Miễn có rửa tay là được', result : '0'},
     ]
   },
   {

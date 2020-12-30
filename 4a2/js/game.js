@@ -224,14 +224,13 @@ function PersonsViewModel() {
   this.answer = ko.observableArray();
 
   this.title = ko.computed(function() {
-    return '(Câu ' + this.number() + ' trên tổng số ' + QUESTION_NUMBER + ' câu hỏi)';
+    return '(' + this.number() + ' trên tổng số ' + QUESTION_NUMBER + ' câu hỏi)';
   }, this);
 
   this.appendQuestion = function() {
-    console.log(111111);
     this.question(QUESTION_LIST[this.i].question);
     this.answer(QUESTION_LIST[this.i].answer);
-    this.number(++this.i);
+    this.number('Câu ' + ++this.i);
   }
 }
 ko.applyBindings(new PersonsViewModel());
@@ -244,6 +243,11 @@ $("#question-display").animatedModal({
 
   },
   afterClose: function () {
-    game.status = "playing";
+    let radioValue = $("input[name='answer-radio']:checked").val();
+    if (radioValue == 1) {
+      game.status = "playing";
+    } else {
+      game.status = "gameover";
+    }
   }
 });
