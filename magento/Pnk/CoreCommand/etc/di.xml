@@ -3,7 +3,7 @@
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="commandStoreList" xsi:type="object">Magento\CommandExample\Console\Command\StoreListCommand</item>
+                <item name="commandGenerator" xsi:type="object">Pnk\CoreCommand\Console\Command\GeneratorCommand</item>
 <!--                <item name="commandWebsiteList" xsi:type="object">Magento\Store\Console\Command\WebsiteListCommand</item>-->
             </argument>
         </arguments>
