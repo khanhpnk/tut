@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ee029c65-e3fb-43e4-a9a6-fa258e4d5313" name="Default Changelist" comment="">
+    <list default="true" id="9825310c-fdb5-4997-9213-846fbfcc2784" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/tut.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tut.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composite/CompositeView.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composite/ContainerInterface.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composite/TemplateInterface.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composite/View.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composite/ViewInterface.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composite/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composite/view/body.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composite/view/footer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composite/view/header.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvc/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvc/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvc/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvc/ti/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvc/tni/ex1.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/mvc/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1lbK77RPWRGKMFEe2Eb3BryCwtZ" />
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/mvc/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1mP0wlQhquEKZn4T7Ewdv5LthFv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -39,52 +32,56 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/xxxxx" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tvxd" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/xxxxx" />
+      <recent name="$PROJECT_DIR$/tvxd" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/mvc" />
+      <recent name="$PROJECT_DIR$/magento" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/app/controllers" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="index.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/mvc/index.php">
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="PHP Script.index.php" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ee029c65-e3fb-43e4-a9a6-fa258e4d5313" name="Default Changelist" comment="" />
-      <created>1607860180894</created>
+      <changelist id="9825310c-fdb5-4997-9213-846fbfcc2784" name="Default Changelist" comment="" />
+      <created>1609380159646</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1607860180894</updated>
-      <workItem from="1607860182158" duration="606000" />
-      <workItem from="1607871118143" duration="2487000" />
-      <workItem from="1607876129891" duration="1328000" />
-      <workItem from="1607912631162" duration="111000" />
-      <workItem from="1607912939095" duration="1895000" />
-      <workItem from="1607929542715" duration="8000" />
-      <workItem from="1607929703558" duration="8000" />
-      <workItem from="1607930981318" duration="4453000" />
-      <workItem from="1607936674706" duration="4660000" />
+      <updated>1609380159646</updated>
+      <workItem from="1609380161114" duration="197000" />
+      <workItem from="1609411989253" duration="14000" />
+      <workItem from="1609415883622" duration="23000" />
+      <workItem from="1609415919264" duration="83000" />
+      <workItem from="1609416036564" duration="158000" />
+      <workItem from="1609752417761" duration="10000" />
+      <workItem from="1610334649400" duration="756000" />
+      <workItem from="1610336937661" duration="106000" />
+      <workItem from="1610337431575" duration="4608000" />
+      <workItem from="1610437945933" duration="229000" />
+      <workItem from="1610618826235" duration="146000" />
+      <workItem from="1610619746027" duration="461000" />
+      <workItem from="1611194865395" duration="738000" />
+      <workItem from="1611281130390" duration="1298000" />
+      <workItem from="1611317325026" duration="2475000" />
     </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1609415956237</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1609415956237</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
 </project>
